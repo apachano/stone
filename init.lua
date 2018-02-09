@@ -6,7 +6,7 @@ function add_stone(name, opacity)
 		description = "" .. name,
 		tiles = { name .. ".png"},
 		groups = {cracky = 3, stone = 1},
-		drop = 'stone:" .. name .. "_cobble',
+		drop = "stone:" .. name .. "_cobble",
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -22,7 +22,7 @@ function add_stone(name, opacity)
 		description = "" .. name .. " Brick",
 		paramtype2 = "facedir",
 		place_param2 = 0,
-		tiles = { name .. ".png^(overlay_brick.png^[opacity:" .. opacity .. ")"},
+		tiles = { name .. ".png^(overlay_brick.png^[opacity:" .. opacity .. "])"},
 		is_ground_content = false,
 		groups = {cracky = 2, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
@@ -32,7 +32,7 @@ function add_stone(name, opacity)
 		description = "Fancy " .. name .. " Brick",
 		paramtype2 = "facedir",
 		place_param2 = 0,
-		tiles = { name .. ".png^(overlay_brick_fancy.png^[opacity:" .. opacity .. ")"},
+		tiles = { name .. ".png^(overlay_brick_fancy.png^[opacity:" .. opacity .. "])"},
 		is_ground_content = false,
 		groups = {cracky = 2, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
@@ -42,7 +42,7 @@ function add_stone(name, opacity)
 		description = "Mossy " .. name .. " Brick",
 		paramtype2 = "facedir",
 		place_param2 = 0,
-		tiles = { name .. ".png^(overlay_brick.png^[opacity:" .. opacity .. ")^(overlay_moss.png^[opacity:256])"},
+		tiles = { name .. ".png^(overlay_brick.png^[opacity:" .. opacity .. "])^(overlay_moss.png^[opacity:200])"},
 		is_ground_content = false,
 		groups = {cracky = 2, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
@@ -50,7 +50,7 @@ function add_stone(name, opacity)
 
 	minetest.register_node("stone:" .. name .. "_block", {
 		description = "" .. name .. " Block",
-		tiles = { name .. ".png^(overlay_block.png^[opacity:" .. opacity .. ")"},
+		tiles = { name .. ".png^(overlay_block.png^[opacity:" .. opacity .. "])"},
 		is_ground_content = false,
 		groups = {cracky = 2, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
@@ -58,11 +58,46 @@ function add_stone(name, opacity)
 
 	minetest.register_node("stone:" .. name .. "_mossycobble", {
 		description = "Mossy " .. name .. " Cobblestone",
-		tiles = { name .. ".png^(overlay_cobble.png^[opacity:" .. opacity .. ")^overlay_moss.png"},
+		tiles = { name .. ".png^(overlay_cobble.png^[opacity:" .. opacity .. "])^overlay_moss.png^[opacity:200]"},
 		is_ground_content = false,
 		groups = {cracky = 3, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
+
+	--Crafting
+
+	minetest.register_craft({
+		output = "stone:" .. name .. "_brick 4",
+		recipe = {
+			{"stone:" .. name, "stone:" .. name},
+			{"stone:" .. name, "stone:" .. name},
+		}
+	})
+
+	minetest.register_craft({
+		output = "stone:fancy_" .. name .. "_brick 4",
+		recipe = {
+			{"stone:" .. name .. "_brick", "stone:" .. name .. "_brick"},
+			{"stone:" .. name .. "_brick", "stone:" .. name .. "_brick"},
+		}
+	})
+
+	minetest.register_craft({
+		output = "stone:" .. name .. "_block 9",
+		recipe = {
+			{"stone:" .. name, "stone:" .. name, "stone:" .. name},
+			{"stone:" .. name, "stone:" .. name, "stone:" .. name},
+			{"stone:" .. name, "stone:" .. name, "stone:" .. name},
+		}
+	})
+
+	minetest.register_craft({
+		type = "cooking",
+		output = "stone:" .. name,
+		recipe = "stone:" .. name .. "_cobble",
+	})
+
+	--Advanced tools integration if available
 	if advanced_tools then
 		add_tools(name, modpath .. "/textures/" .. name .. ".png")
 	end
