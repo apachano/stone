@@ -1,3 +1,4 @@
+local modpath = minetest.get_modpath("stone")
 
 function add_stone(name, opacity)
 
@@ -62,6 +63,9 @@ function add_stone(name, opacity)
 		groups = {cracky = 3, stone = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
+	if advanced_tools then
+		add_tools(name, modpath .. "/textures/" .. name .. ".png")
+	end
 
 end
 
