@@ -12,7 +12,7 @@ function add_stone(name, opacity)
 
 	minetest.register_node("stone:" .. name .. "_cobble", {
 		description = "" .. name .. " Cobblestone",
-		tiles = { name .. ".png^(overlay_cobble.png^[opacity:" .. opacity .. "])"},
+		tiles = { name .. ".png^(overlay_cobble.png^[opacity:64])"},
 		is_ground_content = false,
 		groups = {cracky = 3, stone = 2},
 		sounds = default.node_sound_stone_defaults(),
@@ -116,7 +116,7 @@ function add_stone(name, opacity)
 			name .. "_cobble", 
 			"stone:" .. name .. "_cobble",
 			{cracky = 3, stone = 1}, 
-			{ name .. ".png^(overlay_cobble.png^[opacity:" .. opacity .. "])"}, 
+			{ name .. ".png^(overlay_cobble.png^[opacity:64])"}, 
 			name .. " Cobble Stair", 
 			name .. " Cobble Slab", 
 			default.node_sound_stone_defaults()
@@ -125,7 +125,7 @@ function add_stone(name, opacity)
 			name .. "_brick", 
 			"stone:" .. name .. "_brick",
 			{cracky = 3, stone = 1}, 
-			{ name .. ".png^(overlay_brick_fancy.png^[opacity:" .. opacity .. "])"}, 
+			{ name .. ".png^(overlay_brick.png^[opacity:" .. opacity .. "])"}, 
 			name .. " Brick Stair", 
 			name .. " Brick Slab", 
 			default.node_sound_stone_defaults()
